@@ -1,0 +1,3 @@
+docker start -i inspiring_albattani
+root@2284fa02a2eb:/# nano /usr/src/app/index.js
+root@2284fa02a2eb:/#
