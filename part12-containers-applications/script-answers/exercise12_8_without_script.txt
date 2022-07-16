@@ -1,0 +1,52 @@
+docker exec -it todo-backend-mongo-1 bash
+root@0c6999813545:/# mongo -u root -p example
+MongoDB shell version v5.0.9
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("fa36cc1c-1c66-4106-b8a3-fa4c1e4f4e51") }
+MongoDB server version: 5.0.9
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-07-16T13:29:44.426+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2022-07-16T13:29:44.689+00:00: /sys/kernel/mm/transparent_hugepage/enabled is 'always'. We suggest setting it to 'never'
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs
+admin         0.000GB
+config        0.000GB
+local         0.000GB
+the_database  0.000GB
+> use the_database
+switched to db the_database
+> show collections
+todos
+> db.todos.find({})
+{ "_id" : ObjectId("62d27613cc2f98306c66bdef"), "text" : "Updated TODO", "done" : false }
+{ "_id" : ObjectId("62d27613cc2f98306c66bdf0"), "text" : "Learn about containers", "done" : false }
+> db.todos.insertOne({"text": "Increase the number of tools in my toolbelt", "done" : false})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62d2bdf4da2a171559415e79")
+}
+> db.todos.find({})
+{ "_id" : ObjectId("62d27613cc2f98306c66bdef"), "text" : "Updated TODO", "done" : false }
+{ "_id" : ObjectId("62d27613cc2f98306c66bdf0"), "text" : "Learn about containers", "done" : false }
+{ "_id" : ObjectId("62d2bdf4da2a171559415e79"), "text" : "Increase the number of tools in my toolbelt", "done" : false }
+> exit
+bye
