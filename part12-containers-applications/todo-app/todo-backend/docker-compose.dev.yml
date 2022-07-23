@@ -14,12 +14,23 @@ services:
       - mongo_data:/data/db
   redis:
     image: redis
-    restart: always
     ports:
       - '6379:6379'
-    command: ['redis-server', '--appendonly', 'yes']
+    command: ['redis-server', '--appendonly', 'yes', '--bind', 'redis', '--port', '6379']
     volumes:
       - redis_data:/data
+  server:
+    image: todo-back
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://the_username:the_password@mongo:27017/the_database
 volumes:
   mongo_data:
   redis_data:
