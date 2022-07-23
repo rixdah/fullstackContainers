@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  app:
+    image: todo-front
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 8000:80
+    container_name: todo-front
