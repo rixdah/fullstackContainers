@@ -8,10 +8,9 @@ RUN CI=true npm test
 FROM test-stage AS build-stage
 WORKDIR /usr/src/app
 COPY . .
-ENV REACT_APP_BACKEND_URL=http://localhost:3000
+ENV REACT_APP_BACKEND_URL=http://localhost:3001
 RUN npm install
 RUN npm ci
 RUN npm run build
-
-FROM nginx:1.20-alpine
-COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
+RUN npm install -g serve
+CMD ["serve", "build"]
