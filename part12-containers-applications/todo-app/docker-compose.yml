@@ -28,7 +28,7 @@ services:
       - ./todo-frontend/:/usr/src/app
     environment:
       - REACT_APP_BACKEND_URL=api/
-  backend:
+  server:
     image: todo-back
     build:
       context: ./todo-backend/
