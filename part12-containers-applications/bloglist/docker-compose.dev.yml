@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    image: dev-bloglist-back
+    build:
+      context: ./bloglist-backend/
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./bloglist-backend/:/usr/src/app
+    ports:
+      - 3003:3003
+  app:
+    image: dev-bloglist-front
+    build:
+      context: ./bloglist-frontend/
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./bloglist-frontend/:/usr/src/app
+    ports:
+      - 3000:3000
